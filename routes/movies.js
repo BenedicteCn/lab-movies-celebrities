@@ -60,7 +60,8 @@ router.post("/movies/:id", async (req, res, next) => {
   try {
     const updateMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    });
+    }).populate("name");
+
     res.status(200).json(updateMovie);
   } catch (err) {
     next(err);
